@@ -1,5 +1,6 @@
 package org.example.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.dto.request.CalculateRequest;
 import org.example.dto.response.CalculateResponse;
 import org.example.service.CalculateService;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
+@Slf4j
 @Service
 public class CalculateServiceImpl implements CalculateService {
 
@@ -23,6 +25,7 @@ public class CalculateServiceImpl implements CalculateService {
             vacationPay = calculateVacationWithHolidays(dailyRate, countOfDays, startDate);
         }
 
+        log.info("Vacation has been calculated: " + vacationPay);
         return new CalculateResponse(vacationPay);
     }
 

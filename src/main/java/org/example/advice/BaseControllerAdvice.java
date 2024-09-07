@@ -1,6 +1,7 @@
 package org.example.advice;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.dto.ErrorMessage;
 import org.example.exception.BaseException;
 import org.example.utli.MessageHelper;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 
+@Slf4j
 @RequiredArgsConstructor
 public class BaseControllerAdvice {
 
@@ -21,6 +23,7 @@ public class BaseControllerAdvice {
         }
         var devMessage = exception.getMessage();
         var args = exception.getArgs();
+        log.error(code + " : " + exception.getArgsAsString(), exception);
         return ResponseEntity
                 .status(status)
                 .body(ErrorMessage.builder()

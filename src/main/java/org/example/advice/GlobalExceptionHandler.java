@@ -1,5 +1,6 @@
 package org.example.advice;
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.dto.ErrorMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import java.util.HashMap;
 
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -23,6 +25,7 @@ public class GlobalExceptionHandler {
         var errorMessage = setErrorMessage(args);
 
         var response = setResponse(errorMessage, HttpStatus.METHOD_NOT_ALLOWED);
+        log.error(ex.getMessage(), ex);
         return response;
     }
 
@@ -34,6 +37,7 @@ public class GlobalExceptionHandler {
         var errorMessage = setErrorMessage(args);
 
         var response = setResponse(errorMessage, HttpStatus.BAD_REQUEST);
+        log.error(ex.getMessage(), ex);
         return response;
     }
 
